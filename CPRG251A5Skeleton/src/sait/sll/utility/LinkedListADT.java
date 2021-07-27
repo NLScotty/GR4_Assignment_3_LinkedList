@@ -3,10 +3,9 @@ package sait.sll.utility;
 /**
  * Abstract data type for a linked list.
  * 
- * @author  
+ * @author  Scott Normore, Christian Lay, Gao Liu, Kin Shing Chong
  * @version 25-03-2021
  *
- * @param Object The reference data type the linked list will contain.
  */
 public interface LinkedListADT 
 {

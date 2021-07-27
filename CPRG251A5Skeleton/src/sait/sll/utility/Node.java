@@ -1,6 +1,8 @@
 package sait.sll.utility;
 
-public class Node {
+import java.io.Serializable;
+
+public class Node implements Serializable{
 	private Object element;
 	private Node nextNode;
 	
@@ -31,10 +33,4 @@ public class Node {
 	public void setNext(Node nextNode) {
 		this.nextNode = nextNode;
 	}
-	
-	/*
-	public String toString() {
-		return this.element.toString();
-	}
-	*/
 }

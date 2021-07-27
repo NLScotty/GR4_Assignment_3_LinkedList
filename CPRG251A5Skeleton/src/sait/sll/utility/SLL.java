@@ -1,6 +1,8 @@
 package sait.sll.utility;
 
-public class SLL implements LinkedListADT{
+import java.io.Serializable;
+
+public class SLL implements LinkedListADT, Serializable{
 
 	private Node head;
 	private Node tail;
@@ -85,7 +87,13 @@ public class SLL implements LinkedListADT{
 			throw new IndexOutOfBoundsException();
 		}
 		else if(index == size-1) {
-			this.tail = new Node(data);
+			Node current = this.head;
+			for(int i=0; i<index-1; i++) {
+				current = current.getNext();
+			}
+			Node newNode = new Node(data);
+			current.setNext(newNode);
+			this.tail = newNode;
 		}
 		else {
 			Node current = this.head;
@@ -103,6 +111,9 @@ public class SLL implements LinkedListADT{
 
 	@Override
 	public void delete(int index) throws IndexOutOfBoundsException {
+		if(index >= this.size || index < 0) {
+			throw new IndexOutOfBoundsException();
+		}
 		if(index==0) {
 			this.head=this.head.getNext();
 		}
@@ -123,6 +134,9 @@ public class SLL implements LinkedListADT{
 
 	@Override
 	public Object retrieve(int index) throws IndexOutOfBoundsException {
+		if(index >= this.size || index < 0) {
+			throw new IndexOutOfBoundsException();
+		}
 		Node current = this.head;
 		for(int i=0; i<index; i++) {
 			current = current.getNext();
@@ -151,14 +165,11 @@ public class SLL implements LinkedListADT{
 		}
 		return false;
 	}
-	
-	
-	
-	
-	
+	/*
 	public void print() {
 		for(Node temp = head; temp != null; temp = temp.getNext()) {
 			System.out.println(temp.getElement().toString());
 		}
 	}
+	*/
 }
