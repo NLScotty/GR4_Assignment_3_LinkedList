@@ -26,6 +26,7 @@ class LinkedListTests {
 	void setUp() throws Exception {
 		// Create your concrete linked list class and assign to to linkedList.
 		this.linkedList = new SLL();
+		
 	}
 
 	/**
@@ -190,6 +191,75 @@ class LinkedListTests {
 		
 		// Test the fourth node value is d
 		assertEquals("d", this.linkedList.retrieve(3));
+		
+		this.linkedList.replace("f",0);
+		
+		/**
+		 * Linked list should now be:
+		 * 
+		 * f -> b -> e -> d
+		 */
+		
+		// Test the linked list is not empty.
+		assertFalse(this.linkedList.isEmpty());
+		
+		// Test the size is 4
+		assertEquals(4, this.linkedList.size());
+		
+		// Check the Contents
+		assertEquals("f", this.linkedList.retrieve(0));
+		assertEquals("b", this.linkedList.retrieve(1));	
+		assertEquals("e", this.linkedList.retrieve(2));
+		assertEquals("d", this.linkedList.retrieve(3));	
+		
+		//Checks to see if head is the correct node
+		/**
+		 * Linked list should now be:
+		 * 
+		 * g -> f -> b -> e -> d
+		 */
+		this.linkedList.prepend("g");
+		assertEquals("g", this.linkedList.retrieve(0));
+		assertEquals("f", this.linkedList.retrieve(1));	
+		assertEquals("b", this.linkedList.retrieve(2));
+		assertEquals("e", this.linkedList.retrieve(3));
+		assertEquals("d", this.linkedList.retrieve(4));
+		
+		this.linkedList.replace("h",4);
+		
+		/**
+		 * Linked list should now be:
+		 * 
+		 * g -> f -> b -> e -> h
+		 */
+		
+		// Test the linked list is not empty.
+		assertFalse(this.linkedList.isEmpty());
+		
+		// Test the size is 5
+		assertEquals(5, this.linkedList.size());
+		
+		// Check the Contents
+		assertEquals("g", this.linkedList.retrieve(0));
+		assertEquals("f", this.linkedList.retrieve(1));	
+		assertEquals("b", this.linkedList.retrieve(2));
+		assertEquals("e", this.linkedList.retrieve(3));	
+		assertEquals("h", this.linkedList.retrieve(4));	
+		
+		//Checks to see if tail is the correct node
+		/**
+		 * Linked list should now be:
+		 * 
+		 * g -> f -> b -> e -> h ->i
+		 */
+		this.linkedList.append("i");
+		// Check the Contents
+		assertEquals("g", this.linkedList.retrieve(0));
+		assertEquals("f", this.linkedList.retrieve(1));	
+		assertEquals("b", this.linkedList.retrieve(2));
+		assertEquals("e", this.linkedList.retrieve(3));
+		assertEquals("h", this.linkedList.retrieve(4));
+		assertEquals("i", this.linkedList.retrieve(5));
 	}
 	
 	/**
@@ -224,6 +294,42 @@ class LinkedListTests {
 		
 		// Test the fourth node value is d
 		assertEquals("d", this.linkedList.retrieve(2));
+		
+		//test for the deleting tail node
+		
+		this.linkedList.delete(2);
+		this.linkedList.append("f");
+		
+		/**
+		 * Linked list should now be:
+		 * 
+		 * a -> b -> f
+		 */
+		
+		// Test the linked list is not empty.
+		assertFalse(this.linkedList.isEmpty());
+		
+		// Test the size is 4
+		assertEquals(3, this.linkedList.size());
+		
+		assertEquals("b", this.linkedList.retrieve(1));
+		assertEquals("f", this.linkedList.retrieve(2));
+		
+		// Test deleting the head node
+		this.linkedList.delete(0);
+		/**
+		 * Linked list should now be:
+		 * 
+		 * b -> f
+		 */
+		
+		// Test the linked list is not empty.
+		assertFalse(this.linkedList.isEmpty());	
+		// Test the size is 4
+		assertEquals(2, this.linkedList.size());
+		
+		assertEquals("b", this.linkedList.retrieve(0));
+		assertEquals("f", this.linkedList.retrieve(1));		
 	}
 	
 	/**
@@ -254,30 +360,144 @@ class LinkedListTests {
 	
 	//Group written tests
 	@Test
-	void testDeleteTailNode() {
+	void testSize() {
+		this.linkedList.append("a");
+		this.linkedList.append("b");
+		this.linkedList.append("c");
+		this.linkedList.append("d");
+		this.linkedList.append("d");
+		this.linkedList.append("d");
+		
+		assertEquals(6, this.linkedList.size());
+	}
+	
+	@Test
+	void testIndexOf() {
 		this.linkedList.append("a");
 		this.linkedList.append("b");
 		this.linkedList.append("c");
 		this.linkedList.append("d");
 		
-		this.linkedList.delete(3);
-		
-		this.linkedList.append("f");
-		
 		/**
 		 * Linked list should now be:
 		 * 
-		 * a -> b -> c -> f
+		 * a -> b -> c -> d
 		 */
-		
-		// Test the linked list is not empty.
-		assertFalse(this.linkedList.isEmpty());
+		// Check the Contents
+		assertEquals("a", this.linkedList.retrieve(0));
+		assertEquals("b", this.linkedList.retrieve(1));	
+		assertEquals("c", this.linkedList.retrieve(2));
+		assertEquals("d", this.linkedList.retrieve(3));
 		
 		// Test the size is 4
 		assertEquals(4, this.linkedList.size());
 		
+		// Tests the use of the indexOf method
+		assertEquals(0, this.linkedList.indexOf("a"));
+		assertEquals(1, this.linkedList.indexOf("b"));
+		assertEquals(2, this.linkedList.indexOf("c"));
+		assertEquals(3, this.linkedList.indexOf("d"));
+		assertEquals(-1, this.linkedList.indexOf("f"));
+	}
+	@Test
+	void testClear() {
+		this.linkedList.append("a");
+		this.linkedList.append("b");
+		this.linkedList.append("c");
+		this.linkedList.append("d");
+		/**
+		 * Linked list should now be:
+		 * 
+		 * a -> b -> c -> d
+		 */
+		// Check the Contents
+		assertEquals("a", this.linkedList.retrieve(0));
+		assertEquals("b", this.linkedList.retrieve(1));	
 		assertEquals("c", this.linkedList.retrieve(2));
-		assertEquals("f", this.linkedList.retrieve(3));
+		assertEquals("d", this.linkedList.retrieve(3));
+		// Test the size is 4
+		assertEquals(4, this.linkedList.size());
+		this.linkedList.clear();
 		
+		//check the size of the linked list
+		assertEquals(0, this.linkedList.size());
+		assertEquals(-1, this.linkedList.indexOf("a"));
+		assertEquals(-1, this.linkedList.indexOf("d"));
+		assertFalse(linkedList.contains("c"));
+	}
+	@Test
+	void testRetreive() {
+		this.linkedList.append("a");
+		this.linkedList.append("b");
+		this.linkedList.append("c");
+		this.linkedList.append("d");
+		
+		/**
+		 * Linked list should now be:
+		 * 
+		 * a -> b -> c -> d
+		 */
+		// Check the Contents
+		assertEquals("a", this.linkedList.retrieve(0));
+		assertEquals("b", this.linkedList.retrieve(1));	
+		assertEquals("c", this.linkedList.retrieve(2));
+		assertEquals("d", this.linkedList.retrieve(3));
+	}
+	void testContains() {
+		this.linkedList.append("a");
+		this.linkedList.append("b");
+		this.linkedList.append("c");
+		this.linkedList.append("d");
+		
+		/**
+		 * Linked list should now be:
+		 * 
+		 * a -> b -> c -> d
+		 */
+		// Check the Contents
+		assertEquals("a", this.linkedList.retrieve(0));
+		assertEquals("b", this.linkedList.retrieve(1));	
+		assertEquals("c", this.linkedList.retrieve(2));
+		assertEquals("d", this.linkedList.retrieve(3));
+		
+		//Tests the use of the contains method
+		assertTrue(linkedList.contains("a"));
+		assertTrue(linkedList.contains("b"));
+		assertTrue(linkedList.contains("c"));
+		assertTrue(linkedList.contains("d"));
+		assertFalse(linkedList.contains("e"));
+	}
+	//tests our methods out of bounds exceptions
+	@Test
+	void testOutOfBounds(){
+		this.linkedList.append("a");
+		this.linkedList.append("b");
+		this.linkedList.append("c");
+		this.linkedList.append("d");
+		
+		try {
+			this.linkedList.insert("f", 4);
+			fail();
+		}catch (IndexOutOfBoundsException ex){
+			
+		}
+		try {
+			this.linkedList.delete(4);
+			fail();
+		}catch (IndexOutOfBoundsException ex){
+			
+		}
+		try {
+			this.linkedList.retrieve(-2);
+			fail();
+		}catch (IndexOutOfBoundsException ex){
+			
+		}
+		try {
+			this.linkedList.replace("f",-4);
+			fail();
+		}catch (IndexOutOfBoundsException ex){
+			
+		}
 	}
 }
